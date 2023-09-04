@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/customers');
+Route::prefix('/customers')->group(function () {
+    Route::get('/', [CustomersController::class, 'getCustomers'])->name('customers.index');
+    Route::post('/', [CustomersController::class, 'postCustomer'])->name('customers.store');
+    Route::put('/{customer}', [CustomersController::class, 'putCustomer'])->name('customers.update');
+});
+
 Route::post('/carts');
 Route::post('/carts/{cartId}/products/{productId}');
 
