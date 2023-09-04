@@ -60,8 +60,8 @@ class CustomerControllerTest extends TestCase
 
         $this
             ->deleteJson(route('customers.delete', $customer))
-            ->assertOk();
+            ->assertNoContent();
 
-        $this->assertDatabaseMissing(Customer::class, $customer);
+        $this->assertDatabaseMissing(Customer::class, $customer->toArray());
     }
 }

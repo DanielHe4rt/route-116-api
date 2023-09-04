@@ -24,4 +24,10 @@ class CustomersController extends Controller
         $customer->update($request->validated());
         return response()->json($customer->refresh());
     }
+
+    public function deleteCustomer(Customer $customer): \Illuminate\Http\Response
+    {
+        $customer->delete();
+        return response()->noContent();
+    }
 }
